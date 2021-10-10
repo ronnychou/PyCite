@@ -10,7 +10,7 @@ title = 'Intercomparisons of cloud mask products among Fengyun-4A, Himawari-8, a
 title = title.encode('utf-8')
 refs = BaiduScholar(title)()
 ref_parse = GBT7714_Parser(refs['GBT7714'])()
-ref = constructor.Acta_Meteorologica_Sinica(ref_parse)
+ref = constructor.ActaMeteorologicaSinica(ref_parse)
 print(ref)
 
 # %%

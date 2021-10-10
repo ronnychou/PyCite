@@ -5,8 +5,8 @@ def baidu_translate(content):
     import urllib
     import random
 
-    appid = '20211009000968381'  # 你的appid
-    secretKey = 'hxiNivFiZjFYZXmGrCUd'  # 你的密钥
+    appid = 'XXXX'  # 百度翻译API appid
+    secretKey = 'XXXX'  # 百度翻译API 密钥
     httpClient = None
     myurl = '/api/trans/vip/translate'
     q = content

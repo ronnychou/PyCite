@@ -16,7 +16,7 @@ class BaiduScholar():
         return self.search_ref()
         
     def search_ref(self, debug=False):
-        json_request = self.search_ref_json(self.paper_name, debug)
+        json_request = self.search_ref_json(debug)
         if not json_request:
             return None
         if(debug): print('parser json')
@@ -35,25 +35,25 @@ class BaiduScholar():
 
     def search_ref_json(self, debug=False):
         if(debug): print("request paper html")
-        page = self.page_request(self.paper_name)
+        page = self.page_request()
         if(debug): print("parser html")
         soup = bs(page, "lxml")
         tags = soup.find_all(name='meta')
         # TODO 筛选多个结果
         # 获取paper链接
         try:
-            paper_url = ''.join(['https:',tags[-1]['content'].split(' ')[-1].replace('url=','')])
-            paper_id = re.findall('paperid=(.*?)&', paper_url)[0]
+            self.paper_url = ''.join(['https:',tags[-1]['content'].split(' ')[-1].replace('url=','')])
+            self.paper_id = re.findall('paperid=(.*?)&', self.paper_url)[0]
             if(debug): print("request reference type json")
-            refs = self.ref_request(paper_id)
+            refs = self.ref_request()
             return refs
         except:
             print('Occur error when parsing html')
             return None
 
-    def page_request(paper_name):
+    def page_request(self):
         params = urllib.parse.urlencode({
-            "wd" : paper_name,                                  # 论文名称
+            "wd" : self.paper_name,                                  # 论文名称
             "tn" : "SE_baiduxueshu_c1gjeupa",                   # 百度学术搜索
             "ie" : "utf-8"})                                    # 编码格式
         url = "http://xueshu.baidu.com/s?{0}".format(params)    # GET参数拼接
@@ -64,10 +64,10 @@ class BaiduScholar():
             print('Occur error when opening url')
             return None
 
-    def ref_request(paper_id):
+    def ref_request(self):
         params = urllib.parse.urlencode({
             "type": "cite",
-            "paperid": paper_id})                            
+            "paperid": self.paper_id})                            
         url = "http://xueshu.baidu.com/u/citation?{0}".format(params)   # GET参数拼接
         try:
             response = urllib.request.urlopen(url, timeout=2).read() # 读取二进制字节

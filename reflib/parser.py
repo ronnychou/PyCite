@@ -48,7 +48,7 @@ class GBT7714_Parser():
         return parse
 
 
-class MlA_Parser():
+class MLA_Parser():
     pass
 
 

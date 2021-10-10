@@ -28,7 +28,7 @@ class GBT7714_Parser():
             parse['volumn'] = _ref[5]
             parse['page'] = _ref[6]
         except:
-            print('检查<GB/T 7714>的<期刊>引用格式! 其必须是 <作者.文献名[类型].刊名.年份,卷号(期号):起-止页码.>')
+            print('请检查<GB/T 7714>的<期刊>引用格式! 其必须是 <作者.文献名[类型].刊名.年份,卷号(期号):起-止页码.>')
         return parse
 
     def dissertation_parser(self):
@@ -44,7 +44,7 @@ class GBT7714_Parser():
             parse['loc'] = _ref[3]
             parse['year'] = _ref[4]
         except:
-            print('检查<GB/T 7714>的<学位论文>引用格式! 其必须是 <作者.文献名[类型].保存单位,年份.>')
+            print('请检查<GB/T 7714>的<学位论文>引用格式! 其必须是 <作者.文献名[类型].保存单位,年份.>')
         return parse
 
 
